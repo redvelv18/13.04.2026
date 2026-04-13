@@ -9,7 +9,7 @@ $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $requestUri = rtrim($requestUri, '/');
 
 if ($requestUri === '/customers') {
-    CustomerController::index($mysqli);
+    CustomerController::index();
 } else {
     http_response_code(404);
     echo "<h3>404 - Lapa nav atrasta</h3>";

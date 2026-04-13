@@ -2,25 +2,18 @@
 
 class DB
 {
-    public static $pdo = null;
+    public static $pdo;
+
     public static function connect()
     {
-        if (self::$pdo === null) {
-            $host = '192.168.216.186';
-            $db   = 'store_dev_diego';
-            $user = 'store_app';
-            $pass = 'password';
-            $charset = 'utf8mb4';
+        if (!self::$pdo) {
+            self::$pdo = new PDO(
+                "mysql:host=192.168.208.1;dbname=store_dev;charset=utf8",
+                "store_app",
+                "password"
+            );
 
-            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-            try {
-                self::$pdo = new PDO($dsn, $user, $pass);
-                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                http_response_code(500);
-                die("Savienojuma kļūda: " . $e->getMessage());
-            }
+            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     }
 
@@ -29,13 +22,10 @@ class DB
         if (self::$pdo === null) {
             self::connect();
         }
-
-        try {
-            $stmt = self::$pdo->query($sqlQuery);
-            return $stmt;
-        } catch (PDOException $e) {
-            http_response_code(500);
-            die("Query kļūda: " . $e->getMessage());
-        }
+    
+        $stmt = self::$pdo->query($sqlQuery);
+        return $stmt;
     }
 }
+
+
