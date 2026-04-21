@@ -1,11 +1,17 @@
 <?php
 
-require_once __DIR__ . '/../../db/DB.php';
+require_once __DIR__ . '/../models/Order.php';
 
 class OrderController
 {
+    public static function listAll()
+    {
+        $orders = Order::getAll();
+        require __DIR__ . '/../views/orders_list.php';
+    }
     public static function index()
     {
+    
         $clientId = isset($_GET['client_id']) ? (int) $_GET['client_id'] : 0;
 
         if ($clientId === 0) {
