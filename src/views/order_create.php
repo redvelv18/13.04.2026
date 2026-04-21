@@ -3,11 +3,14 @@
 <form action="?page=order_store" method="POST" style="max-width: 400px;">
     <div style="margin-bottom: 10px;">
         <label>Klients:</label><br>
-        <select name="client_id" required style="width: 100%;">
-            <?php foreach ($customers as $c): ?>
-                <option value="<?= $c['client_id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
-            <?php endforeach; ?>
-        </select>
+        <select name="client_id" required>
+    <option value="">-- Izvēlies klientu --</option>
+    <?php foreach ($customers as $c): ?>
+        <option value="<?= $c['client_id'] ?>">
+            <?= htmlspecialchars($c['name']) ?> (ID: <?= $c['client_id'] ?>)
+        </option>
+    <?php endforeach; ?>
+</select>
     </div>
 
     <div style="margin-bottom: 10px;">
