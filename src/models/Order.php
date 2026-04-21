@@ -27,5 +27,11 @@ class Order
         $stmt->execute($params);
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public static function getCount()
+    {
+        $stmt = DB::query("SELECT COUNT(*) as total FROM orders");
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] ?? 0;
     }
 }
