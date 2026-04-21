@@ -2,29 +2,39 @@
 
 class DB
 {
-    public static $pdo;
+    public static $mysqli;
 
     public static function connect()
     {
-        if (!self::$pdo) {
-            self::$pdo = new PDO(
-                "mysql:host=192.168.208.1;dbname=store_dev;charset=utf8",
+        if (!self::$mysqli) {
+            self::$mysqli = new mysqli(
+                "192.168.208.1",
                 "store_app",
-                "password"
+                "password",
+                "store_dev_diegosterling"
             );
 
-            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if (self::$mysqli->connect_error) {
+                throw new Exception("Connection failed: " . self::$mysqli->connect_error);
+            }
+
+            self::$mysqli->set_charset("utf8");
         }
     }
 
     public static function query($sqlQuery)
     {
-        if (self::$pdo === null) {
+        if (self::$mysqli === null) {
             self::connect();
         }
-    
-        $stmt = self::$pdo->query($sqlQuery);
-        return $stmt;
+
+        $result = self::$mysqli->query($sqlQuery);
+
+        if ($result === false) {
+            throw new Exception("Query failed: " . self::$mysqli->error);
+        }
+
+        return $result;
     }
 }
 

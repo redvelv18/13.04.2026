@@ -8,7 +8,7 @@ require_once __DIR__ . '/../src/controllers/CustomerController.php';
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $requestUri = rtrim($requestUri, '/');
 
-if ($requestUri === '/customers') {
+if ($requestUri === '/public/index.php') {
     CustomerController::index();
 } else {
     http_response_code(404);
