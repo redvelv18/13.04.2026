@@ -40,7 +40,8 @@ class OrderController
             echo "<tr>";
             echo "<td>" . htmlspecialchars($order['order_id']) . "</td>";
             echo "<td>" . htmlspecialchars($order['order_date']) . "</td>";
-            echo "<td>" . htmlspecialchars($order['comment']) . "</td>";
+            $comment = $order['comment'] ?? 'no comment';
+            echo "<td>" . htmlspecialchars($comment) . "</td>";
             echo "<td>" . htmlspecialchars($order['status']) . "</td>";
             echo "</tr>";
         }
