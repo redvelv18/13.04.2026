@@ -8,7 +8,7 @@ require_once __DIR__ . '/../src/controllers/OrderController.php';
 
 // Default view is clients
 $page = $_GET['page'] ?? 'clients';
-$clientId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
 
 if ($page === 'orders' && $clientId > 0) {
     OrderController::index();

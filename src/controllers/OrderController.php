@@ -6,7 +6,7 @@ class OrderController
 {
     public static function index()
     {
-        $clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
+        $clientId = isset($_GET['client_id']) ? (int) $_GET['client_id'] : 0;
 
         if ($clientId === 0) {
             http_response_code(400);
@@ -14,10 +14,8 @@ class OrderController
             return;
         }
 
-        DB::connect();
-
         $clientResult = DB::query("SELECT name, surname FROM clients WHERE client_id = $clientId");
-        $client = $clientResult->fetch_assoc();
+        $client = $clientResult->fetch(PDO::FETCH_ASSOC);
 
         if (!$client) {
             http_response_code(404);
@@ -38,7 +36,7 @@ class OrderController
         echo "<table border='1'>";
         echo "<tr><th>Order ID</th><th>Date</th><th>Total</th><th>Status</th></tr>";
 
-        while ($order = $ordersResult->fetch_assoc()) {
+        while ($order = $ordersResult->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($order['order_id']) . "</td>";
             echo "<td>" . htmlspecialchars($order['order_date']) . "</td>";
