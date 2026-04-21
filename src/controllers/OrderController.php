@@ -6,7 +6,7 @@ class OrderController
 {
     public static function index()
     {
-        $clientId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
 
         if ($clientId === 0) {
             http_response_code(400);
@@ -48,6 +48,6 @@ class OrderController
         }
 
         echo "</table>";
-        echo "<br><a href='/index.php'>← Atpakaļ uz klientiem</a>";
+        echo "<br><a href='?page=clients'>← Atpakaļ uz klientiem</a>";
     }
 }

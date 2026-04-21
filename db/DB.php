@@ -8,7 +8,7 @@ class DB
     {
         if (!self::$pdo) {
             self::$pdo = new PDO(
-                "mysql:host=192.168.208.1;dbname=store_dev;charset=utf8",
+                "mysql:host=192.168.208.1;dbname=store_dev_diegosterling;charset=utf8",
                 "store_app",
                 "password"
             );
@@ -22,7 +22,7 @@ class DB
         if (self::$pdo === null) {
             self::connect();
         }
-    
+
         $stmt = self::$pdo->query($sqlQuery);
         return $stmt;
     }
