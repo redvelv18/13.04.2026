@@ -1,3 +1,9 @@
+<div style="margin-bottom: 20px;">
+    <a href="?page=clients&with-orders=full">
+       Skatīt klientus ar pasūtījumiem (Full View)
+    </a>
+</div>
+
 <h1>Klienti</h1>
 <table border='1'>
     <thead>
