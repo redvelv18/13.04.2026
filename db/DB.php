@@ -7,12 +7,15 @@ class DB
     public static function connect()
     {
         if (!self::$pdo) {
-            self::$pdo = new PDO(
-                "mysql:host=192.168.208.1;dbname=store_dev_diegosterling;charset=utf8",
-                "store_app",
-                "password"
-            );
+            $config = require __DIR__ . '/config.php';
 
+            $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8";
+            
+            self::$pdo = new PDO(
+                $dsn,
+                $config['db_user'],
+                $config['db_pass']
+            );
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     }
