@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/Order.php';
+require_once __DIR__ . '/../models/Customer.php';
 
 class OrderController
 {
@@ -8,12 +9,12 @@ class OrderController
     {
         $status = $_GET['status'] ?? null;
         $orders = Order::getAll($status);
-        
+
         require __DIR__ . '/../views/orders_list.php';
     }
     public static function index()
     {
-    
+
         $clientId = isset($_GET['client_id']) ? (int) $_GET['client_id'] : 0;
 
         if ($clientId === 0) {
@@ -56,5 +57,25 @@ class OrderController
 
         echo "</table>";
         echo "<br><a href='?page=clients'>← Atpakaļ uz klientiem</a>";
+    }
+
+    public static function createForm()
+    {
+        $customers = Customer::getAll(); // To populate the dropdown
+        require __DIR__ . '/../views/order_create.php';
+    }
+    public static function store() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $clientId = $_POST['client_id'];
+            $date = $_POST['order_date'];
+            $comment = $_POST['comment'];
+            $status = $_POST['status'];
+
+            Order::create($clientId, $date, $comment, $status);
+
+            // Redirect back to the orders list
+            header("Location: index.php?page=all_orders");
+            exit();
+        }
     }
 }

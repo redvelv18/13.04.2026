@@ -21,6 +21,10 @@ if ($page === 'home') {
     OrderController::listAll();
 } elseif ($page === 'clients') {
     CustomerController::index();
+} elseif ($page === 'order_create') {
+    OrderController::createForm();
+} elseif ($page === 'order_store') {
+    OrderController::store();
 } else {
     http_response_code(404);
     echo "<h3>404 - Lapa nav atrasta</h3>";
