@@ -34,4 +34,18 @@ class Order
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total'] ?? 0;
     }
+
+        public static function create($clientId, $date, $comment, $status)
+    {
+        DB::connect();
+        $stmt = DB::$pdo->prepare("INSERT INTO orders (order_date, comment, status) VALUES (?, ?, ?)");
+        $stmt->execute([$date, $comment, $status]);
+
+        $orderId = DB::$pdo->lastInsertId();
+        
+        $stmtLink = DB::$pdo->prepare("INSERT INTO client_orders (client_id, order_id) VALUES (?, ?)");
+        $stmtLink->execute([$clientId, $orderId]);
+        
+        return $orderId;
+    }
 }
