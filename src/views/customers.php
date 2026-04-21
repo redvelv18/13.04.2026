@@ -2,6 +2,9 @@
     <a href="?page=clients&with-orders=full">
        Skatīt klientus ar pasūtījumiem (Full View)
     </a>
+    <a href="?page=all_orders">
+        Visi Pasūtījumi
+    </a>
 </div>
 
 <h1>Klienti</h1>
