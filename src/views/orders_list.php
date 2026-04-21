@@ -31,4 +31,3 @@
 </table>
 
 <br>
-<a href="?page=clients">Atpakaļ uz klientu sarakstu</a>

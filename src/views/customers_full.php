@@ -1,8 +1,3 @@
-<div style="margin-bottom: 20px;">
-    <a href="?page=clients">
-        ← Atpakaļ uz tabulas skatu
-    </a>
-</div>
 
 <h1>Klienti un Pasūtījumi (Full View)</h1>
 
