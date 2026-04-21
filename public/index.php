@@ -5,15 +5,16 @@ echo("<h1> Veikals </h1>");
 require(__DIR__ . '/../db/connect.php');
 require_once __DIR__ . '/../src/controllers/CustomerController.php';
 require_once __DIR__ . '/../src/controllers/OrderController.php';
+require_once __DIR__ . '/../src/controllers/HomeController.php';
 
 require_once __DIR__ . '/../src/views/header.php';
 
 // Default view is clients
-$page = $_GET['page'] ?? 'clients';
+$page = $_GET['page'] ?? 'home';
 $clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
 
 if ($page === 'home') {
-    echo "<h1>Laipni lūdzam Veikalā!</h1><p>Izmantojiet augšējo izvēlni, lai navigētu.</p>";
+    HomeController::index();
 } elseif ($page === 'orders' && $clientId > 0) {
     OrderController::index();
 } elseif ($page === 'all_orders') {
