@@ -48,6 +48,6 @@ class OrderController
         }
 
         echo "</table>";
-        echo "<br><a href='/clients'>← Atpakaļ uz klientiem</a>";
+        echo "<br><a href='/index.php'>← Atpakaļ uz klientiem</a>";
     }
 }

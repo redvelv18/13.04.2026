@@ -24,5 +24,6 @@ class CustomerController
         }
     
         echo "</table>";
+        echo "<td><a href='/index.php/" . (int)$row['client_id'] . "/orders'>View Orders</a></td>";
     }
 }
