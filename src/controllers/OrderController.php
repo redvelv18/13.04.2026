@@ -34,7 +34,7 @@ class OrderController
         ");
 
         echo "<table border='1'>";
-        echo "<tr><th>Order ID</th><th>Date</th><th>Total</th><th>Status</th></tr>";
+        echo "<tr><th>Order ID</th><th>Date</th><th>Comment</th><th>Status</th></tr>";
 
         while ($order = $ordersResult->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
