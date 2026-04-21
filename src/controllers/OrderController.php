@@ -6,7 +6,9 @@ class OrderController
 {
     public static function listAll()
     {
-        $orders = Order::getAll();
+        $status = $_GET['status'] ?? null;
+        $orders = Order::getAll($status);
+        
         require __DIR__ . '/../views/orders_list.php';
     }
     public static function index()

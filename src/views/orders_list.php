@@ -1,4 +1,11 @@
-<h1>Visi Pasūtījumi</h1>
+<h1>Visi Pasūtījumi <?= isset($_GET['status']) ? " - " . htmlspecialchars($_GET['status']) : "" ?></h1>
+
+<div style="margin-bottom: 20px;">
+    <strong>Filtrēt pēc statusa:</strong>
+    <a href="?page=all_orders">Visi</a> |
+    <a href="?page=all_orders&status=complete">Pabeigti</a> |
+    <a href="?page=all_orders&status=incomplete">Jauni</a> |
+</div>
 
 <table border="1">
     <thead>
