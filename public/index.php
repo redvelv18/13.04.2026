@@ -12,6 +12,8 @@ $clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
 
 if ($page === 'orders' && $clientId > 0) {
     OrderController::index();
+} elseif ($page === 'all_orders') {
+    OrderController::listAll();
 } elseif ($page === 'clients') {
     CustomerController::index();
 } else {
