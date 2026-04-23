@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-echo("<h1> Veikals </h1>");
+echo ("<h1> Store data </h1>");
 require(__DIR__ . '/../db/connect.php');
 require_once __DIR__ . '/../src/controllers/CustomerController.php';
 require_once __DIR__ . '/../src/controllers/OrderController.php';
@@ -11,7 +11,7 @@ require_once __DIR__ . '/../src/views/header.php';
 
 // Default view is clients
 $page = $_GET['page'] ?? 'home';
-$clientId = isset($_GET['client_id']) ? (int)$_GET['client_id'] : 0;
+$clientId = isset($_GET['client_id']) ? (int) $_GET['client_id'] : 0;
 
 if ($page === 'home') {
     HomeController::index();

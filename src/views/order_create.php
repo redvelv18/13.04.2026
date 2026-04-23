@@ -1,4 +1,4 @@
-<h1>Izveidot jaunu pasūtījumu</h1>
+<h1>Create a new order</h1>
 
 <form action="?page=order_store" method="POST" enctype="multipart/form-data" style="max-width: 400px;">
     <div style="margin-bottom: 10px;">

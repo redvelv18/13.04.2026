@@ -1,6 +1,6 @@
 
 
-<h1>Klienti</h1>
+<h1>Clients</h1>
 <table border='1'>
     <thead>
         <tr>
