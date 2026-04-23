@@ -100,4 +100,16 @@ class OrderController
             exit();
         }
     }
+    public static function destroy()
+{
+    $orderId = isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0;
+
+    if ($orderId > 0) {
+        Order::delete($orderId);
+    }
+
+    // Redirect back to wherever we came from
+    header("Location: " . $_SERVER['HTTP_REFERER']);
+    exit();
+}
 }

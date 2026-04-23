@@ -25,8 +25,11 @@ if ($page === 'home') {
     OrderController::createForm();
 } elseif ($page === 'order_store') {
     OrderController::store();
+} elseif ($page === 'order_delete') {
+    OrderController::destroy();
 } else {
     http_response_code(404);
     echo "<h3>404 - Lapa nav atrasta</h3>";
 }
+
 

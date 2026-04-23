@@ -16,6 +16,7 @@
             <th>Status</th>
             <th>Review</th>
             <th>Uploads</th>
+            <th>Deletion</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,13 @@
                     <?php else: ?>
                         No image
                     <?php endif; ?>
+                </td>
+                <td>
+                    <a href="?page=order_delete&order_id=<?= $order->order_id ?>"
+                        onclick="return confirm('Are you sure you want to delete this order??');"
+                        style="padding: 5px;">
+                        Delete
+                    </a>
                 </td>
             </tr>
         <?php endforeach; ?>

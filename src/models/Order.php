@@ -28,8 +28,6 @@ class Order
         DB::connect();
         $stmt = DB::$pdo->prepare($sql);
         $stmt->execute($params);
-
-        // FETCH_CLASS automatically maps column names to class properties
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
     }
     public static function getCount()
@@ -45,32 +43,49 @@ class Order
         try {
             DB::$pdo->beginTransaction();
 
-            // 1. Insert into the main orders table
             $stmt = DB::$pdo->prepare("INSERT INTO orders (order_date, comment, status, image_path) VALUES (?, ?, ?, ?)");
             $stmt->execute([$date, $comment, $status, $imagePath]);
 
-            // 2. Get the newly generated ID
             $orderId = DB::$pdo->lastInsertId();
 
             if (!$orderId) {
                 throw new Exception("Error: Could not retrieve last insert ID. Is order_id AUTO_INCREMENT?");
             }
 
-            // 3. Link it in the junction table
             $stmtLink = DB::$pdo->prepare("INSERT INTO client_orders (client_id, order_id) VALUES (?, ?)");
             $stmtLink->execute([$clientId, $orderId]);
 
-            // 4. Commit EVERYTHING at once
             DB::$pdo->commit();
 
             return $orderId;
 
         } catch (Exception $e) {
-            // If anything fails (including a duplicate entry), undo the first insert
             if (DB::$pdo->inTransaction()) {
                 DB::$pdo->rollBack();
             }
             throw $e;
         }
+
     }
+    public static function delete($orderId)
+{
+    DB::connect();
+    try {
+        DB::$pdo->beginTransaction();
+
+        $stmt1 = DB::$pdo->prepare("DELETE FROM client_orders WHERE order_id = ?");
+        $stmt1->execute([$orderId]);
+
+        $stmt2 = DB::$pdo->prepare("DELETE FROM orders WHERE order_id = ?");
+        $stmt2->execute([$orderId]);
+
+        DB::$pdo->commit();
+        return true;
+    } catch (Exception $e) {
+        DB::$pdo->rollBack();
+        throw $e;
+    }
+}
+
+    
 }
