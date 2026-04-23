@@ -5,9 +5,9 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Vārds</th>
-            <th>E-pasts</th>
-            <th>Pasūtījumi</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Orders</th>
         </tr>
     </thead>
     <tbody>

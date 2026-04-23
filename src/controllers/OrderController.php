@@ -35,7 +35,7 @@ class OrderController
         echo "<h1>" . htmlspecialchars($client['name'] . ' ' . $client['surname']) . " — Pasūtījumi</h1>";
 
         $ordersResult = DB::query("
-            SELECT o.order_id, o.order_date, o.comment, o.status 
+            SELECT o.order_id, o.order_date, o.comment, o.status, o.image_path 
             FROM orders o
             JOIN client_orders co ON o.order_id = co.order_id
             WHERE co.client_id = $clientId
@@ -43,7 +43,7 @@ class OrderController
         ");
 
         echo "<table border='1'>";
-        echo "<tr><th>Order ID</th><th>Date</th><th>Comment</th><th>Status</th></tr>";
+        echo "<tr><th>Order ID</th><th>Date</th><th>Comment</th><th>Status</th><th>Image</th></tr>";
 
         while ($order = $ordersResult->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
@@ -52,6 +52,16 @@ class OrderController
             $comment = $order['comment'] ?? 'no comment';
             echo "<td>" . htmlspecialchars($comment) . "</td>";
             echo "<td>" . htmlspecialchars($order['status']) . "</td>";
+            echo "<td>";
+            if (!empty($order['image_path'])) {
+                echo "<a href='uploads/" . htmlspecialchars($order['image_path']) . "' target='_blank' 
+                  style='padding: 5px 10px;'>
+                  Skatīt attēlu
+                  </a>";
+            } else {
+                echo "<span>Nav attēla</span>";
+            }
+            echo "</td>";
             echo "</tr>";
         }
 
@@ -64,16 +74,28 @@ class OrderController
         $customers = Customer::getAll(); // To populate the dropdown
         require __DIR__ . '/../views/order_create.php';
     }
-    public static function store() {
+    public static function store()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $clientId = $_POST['client_id'];
             $date = $_POST['order_date'];
             $comment = $_POST['comment'];
             $status = $_POST['status'];
+            $imageName = null;
 
-            Order::create($clientId, $date, $comment, $status);
+            if (isset($_FILES['order_image']) && $_FILES['order_image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = __DIR__ . '/../../public/uploads/';
 
-            // Redirect back to the orders list
+                if (!is_dir($uploadDir))
+                    mkdir($uploadDir, 0777, true);
+                $extension = pathinfo($_FILES['order_image']['name'], PATHINFO_EXTENSION);
+                $imageName = time() . '_' . uniqid() . '.' . $extension;
+
+                move_uploaded_file($_FILES['order_image']['tmp_name'], $uploadDir . $imageName);
+            }
+
+            Order::create($clientId, $date, $comment, $status, $imageName);
+
             header("Location: index.php?page=all_orders");
             exit();
         }

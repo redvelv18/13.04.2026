@@ -1,5 +1,5 @@
 
-<h1>Klienti un Pasūtījumi (Full View)</h1>
+<h1>Clients and Orders (Full View)</h1>
 
 <ul>
     <?php foreach ($customers as $c): ?>
@@ -11,14 +11,14 @@
                 <ul style="margin-top: 5px; color: #555;">
                     <?php foreach ($c->orders as $order): ?>
                         <li>
-                            Pasūtījums #<?= htmlspecialchars($order->id) ?> —
-                            Datums: <?= htmlspecialchars($order->date) ?>
+                            Order #<?= htmlspecialchars($order->id) ?> —
+                            Date: <?= htmlspecialchars($order->date) ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
                 <p style="margin: 0; font-size: 0.9em; color: #999; font-style: italic;">
-                    Nav pasūtījumu.
+                    No orders.
                 </p>
             <?php endif; ?>
         </li>

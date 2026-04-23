@@ -1,15 +1,15 @@
-<h1>Sistēmas Statistika</h1>
+<h1>Statistics</h1>
 
 <div>
     <div>
-        <h3>Klienti</h3>
+        <h3>Clients</h3>
         <p>
             <?= $customerCount ?>
         </p>
     </div>
 
     <div>
-        <h3>Pasūtījumi</h3>
+        <h3>Orders</h3>
         <p>
             <?= $orderCount ?>
         </p>

@@ -4,10 +4,10 @@
             <a href="index.php">Home</a>
         </li>
         <li>
-            <a href="?page=clients">Klienti</a>
+            <a href="?page=clients">Clients</a>
         </li>
         <li>
-            <a href="?page=all_orders">Visi Pasūtījumi</a>
+            <a href="?page=all_orders">All orders</a>
         </li>
     </ul>
 </nav>
