@@ -4,15 +4,15 @@
 <ul>
     <?php foreach ($customers as $c): ?>
         <li style="margin-bottom: 15px;">
-            <strong><?= htmlspecialchars($c['name'] ?? 'Unknown') ?></strong>
-            (ID: <?= htmlspecialchars($c['client_id']) ?>)
+            <strong><?= htmlspecialchars($c->name ?? 'Unknown') ?></strong>
+            (ID: <?= htmlspecialchars($c->client_id) ?>)
 
             <?php if (!empty($c['orders'])): ?>
                 <ul style="margin-top: 5px; color: #555;">
-                    <?php foreach ($c['orders'] as $order): ?>
+                    <?php foreach ($c->orders as $order): ?>
                         <li>
-                            Pasūtījums #<?= htmlspecialchars($order['id']) ?> —
-                            Datums: <?= htmlspecialchars($order['date']) ?>
+                            Pasūtījums #<?= htmlspecialchars($order->id) ?> —
+                            Datums: <?= htmlspecialchars($order->date) ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

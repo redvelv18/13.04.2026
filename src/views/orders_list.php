@@ -20,11 +20,11 @@
     <tbody>
         <?php foreach ($orders as $order): ?>
             <tr>
-                <td><?= htmlspecialchars($order['order_id'] ?? '') ?></td>
-                <td><?= htmlspecialchars($order['client_name'] ?? 'Nav piesaistīts') ?></td>
-                <td><?= htmlspecialchars($order['order_date'] ?? '') ?></td>
-                <td><?= htmlspecialchars($order['status'] ?? '') ?></td>
-                <td><?= htmlspecialchars($order['comment'] ?? 'no comment') ?></td>
+                <td><?= htmlspecialchars($order->order_id ?? '') ?></td>
+                <td><?= htmlspecialchars($order->client_name ?? 'Nav piesaistīts') ?></td>
+                <td><?= htmlspecialchars($order->order_date ?? '') ?></td>
+                <td><?= htmlspecialchars($order->status ?? '') ?></td>
+                <td><?= htmlspecialchars($order->comment ?? 'no comment') ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

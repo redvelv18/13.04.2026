@@ -6,8 +6,8 @@
         <select name="client_id" required>
     <option value="">-- Izvēlies klientu --</option>
     <?php foreach ($customers as $c): ?>
-        <option value="<?= $c['client_id'] ?>">
-            <?= htmlspecialchars($c['name']) ?> (ID: <?= $c['client_id'] ?>)
+        <option value="<?= $c->client_id ?>">
+            <?= htmlspecialchars($c->name) ?> (ID: <?= $c->client_id ?>)
         </option>
     <?php endforeach; ?>
 </select>

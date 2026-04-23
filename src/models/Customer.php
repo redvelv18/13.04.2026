@@ -4,13 +4,19 @@ require_once __DIR__ . '/../../db/DB.php';
 
 class Customer
 {
+
+        public $client_id;
+        public $name;
+        public $surname;
+        public $points;
+        public $email;
     /**
      * Fetches all customers (simple list)
      */
     public static function getAll()
     {
         $stmt = DB::query("SELECT client_id, name, email FROM clients");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 
     /**
